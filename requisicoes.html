@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Números</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .campos {
+            display: flex;
+            gap: 15px;
+        }
+
+        .campo {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 16px;
+            resize: vertical;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #mensagem {
+            text-align: center;
+            margin-top: 10px;
+            color: green;
+        }
+
+        @media (max-width: 500px) {
+            .campos {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Gerador de Números</h1>
+
+        <div class="campos">
+
+            <div class="campo">
+                <label for="inicio">Início</label>
+                <input type="number" id="inicio" placeholder="Ex: 1001">
+            </div>
+
+            <div class="campo">
+                <label for="fim">Fim</label>
+                <input type="number" id="fim" placeholder="Ex: 1009">
+            </div>
+
+        </div>
+
+        <button onclick="gerarNumeros()">Gerar números</button>
+
+        <textarea id="resultado" readonly placeholder="O resultado aparecerá aqui..."></textarea>
+
+        <button onclick="copiarResultado()">Copiar</button>
+
+        <div id="mensagem"></div>
+
+    </div>
+
+    <script>
+        function gerarNumeros() {
+
+            const inicio = parseInt(document.getElementById("inicio").value);
+            const fim = parseInt(document.getElementById("fim").value);
+
+            if (isNaN(inicio) || isNaN(fim)) {
+                alert("Digite o número inicial e o número final.");
+                return;
+            }
+
+            if (inicio > fim) {
+                alert("O número inicial deve ser menor ou igual ao número final.");
+                return;
+            }
+
+            let numeros = [];
+
+            for (let i = inicio; i <= fim; i++) {
+                numeros.push(i);
+            }
+
+            document.getElementById("resultado").value = numeros.join(",");
+        }
+
+
+        function copiarResultado() {
+
+            const resultado = document.getElementById("resultado");
+
+            if (resultado.value === "") {
+                alert("Gere os números primeiro.");
+                return;
+            }
+
+            navigator.clipboard.writeText(resultado.value);
+
+            document.getElementById("mensagem").textContent =
+                "Números copiados!";
+
+            setTimeout(() => {
+                document.getElementById("mensagem").textContent = "";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
