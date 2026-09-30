@@ -2,849 +2,391 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Requisições Superviza</title>
-
-
     <style>
-
         * {
             box-sizing: border-box;
         }
 
-
         body {
-
             margin: 0;
-
             font-family: Arial, sans-serif;
-
             background-color: #f2f2f2;
-
             min-height: 100vh;
-
         }
-
-
-        /* ==========================
-           MENU
-        ========================== */
 
         .menu {
-
             width: 100%;
-
             background-color: #333;
-
             display: flex;
-
             justify-content: center;
-
         }
-
 
         .tab-button {
-
             border: none;
-
             background-color: #333;
-
             color: white;
-
             padding: 16px 30px;
-
             font-size: 16px;
-
             cursor: pointer;
-
             width: auto;
-
             margin: 0;
-
         }
-
 
         .tab-button:hover {
-
             background-color: #555;
-
         }
-
 
         .tab-button.active {
-
             background-color: white;
-
             color: #333;
-
         }
-
-
-        /* ==========================
-           ABAS
-        ========================== */
 
         .tab-content {
-
             display: none;
-
             padding: 30px 15px;
-
         }
-
 
         .tab-content.active {
-
             display: block;
-
         }
-
-
-        /* ==========================
-           CONTAINER
-        ========================== */
 
         .container {
-
             background-color: white;
-
             width: 100%;
-
             max-width: 650px;
-
             margin: 0 auto;
-
             padding: 30px;
-
             border-radius: 10px;
-
             box-shadow:
                 0 4px 15px rgba(0, 0, 0, 0.1);
-
         }
-
 
         h1 {
-
             text-align: center;
-
             margin-bottom: 25px;
-
         }
-
 
         h2 {
-
             margin-top: 30px;
-
             margin-bottom: 10px;
-
             padding-bottom: 8px;
-
             border-bottom: 2px solid #ddd;
-
         }
-
-
-        /* ==========================
-           REQUISIÇÕES
-        ========================== */
 
         .campos {
-
             display: flex;
-
             gap: 15px;
-
         }
-
 
         .campo {
-
             flex: 1;
-
         }
-
 
         label {
-
             display: block;
-
             margin-bottom: 5px;
-
             font-weight: bold;
-
         }
-
 
         input {
-
             width: 100%;
-
             padding: 12px;
-
             font-size: 16px;
-
             border: 1px solid #ccc;
-
             border-radius: 5px;
-
         }
-
 
         button {
-
             width: 100%;
-
             padding: 12px;
-
             margin-top: 20px;
-
             border: none;
-
             border-radius: 5px;
-
             background-color: #333;
-
             color: white;
-
             font-size: 16px;
-
             cursor: pointer;
-
         }
-
 
         button:hover {
-
             background-color: #555;
-
         }
-
 
         textarea {
-
             width: 100%;
-
             height: 120px;
-
             margin-top: 20px;
-
             padding: 12px;
-
             font-size: 16px;
-
             resize: vertical;
-
             border: 1px solid #ccc;
-
             border-radius: 5px;
-
         }
-
 
         #mensagem {
-
             text-align: center;
-
             margin-top: 10px;
-
             color: green;
-
         }
-
-
-        /* ==========================
-           CONTAGEM
-        ========================== */
 
         .categoria {
-
             margin-bottom: 30px;
-
         }
-
 
         .loja {
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 12px 0;
-
             border-bottom: 1px solid #eee;
-
         }
-
 
         .nome-loja {
-
             font-size: 16px;
-
             font-weight: bold;
-
         }
-
 
         .contador {
-
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
         }
-
 
         .contador button {
-
             width: 40px;
-
             height: 40px;
-
             padding: 0;
-
             margin: 0;
-
             font-size: 22px;
-
             border-radius: 5px;
-
         }
-
 
         .quantidade {
-
             min-width: 35px;
-
             text-align: center;
-
             font-size: 18px;
-
             font-weight: bold;
-
         }
-
-
-        /* ==========================
-           TOTAL
-        ========================== */
 
         .total-categoria {
-
             text-align: right;
-
             font-weight: bold;
-
             margin-top: 12px;
-
         }
-
 
         .total-geral {
-
             margin-top: 25px;
-
             padding: 18px;
-
             background-color: #333;
-
             color: white;
-
             border-radius: 5px;
-
             text-align: center;
-
             font-size: 20px;
-
             font-weight: bold;
-
         }
-
-
-        /* ==========================
-           RELATÓRIO
-        ========================== */
 
         .relatorio {
-
             margin-top: 20px;
-
             background-color: #f8f8f8;
-
             padding: 15px;
-
             border-radius: 5px;
-
             border: 1px solid #ddd;
-
             white-space: pre-line;
-
             font-size: 15px;
-
             line-height: 1.6;
-
         }
-
 
         .botao-copiar {
-
             background-color: #555;
-
         }
-
 
         .botao-zerar {
-
             background-color: #9b2226;
-
         }
-
 
         .botao-zerar:hover {
-
             background-color: #7d191d;
-
         }
-
-
-        /* ==========================
-           RESPONSIVO
-        ========================== */
 
         @media (max-width: 500px) {
-
             .campos {
-
                 flex-direction: column;
-
             }
-
 
             .tab-button {
-
                 padding: 14px 15px;
-
                 font-size: 14px;
-
             }
-
 
             .container {
-
                 padding: 20px;
-
             }
-
 
             .nome-loja {
-
                 font-size: 14px;
-
             }
-
         }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- ==========================
-         MENU
-    ========================== -->
-
     <div class="menu">
-
-        <button
-            class="tab-button active"
-            onclick="abrirAba('requisicoes', this)"
-        >
+        <button class="tab-button active" onclick="abrirAba('requisicoes', this)">
             Requisições
         </button>
-
-
-        <button
-            class="tab-button"
-            onclick="abrirAba('paletes', this)"
-        >
+        <button class="tab-button" onclick="abrirAba('paletes', this)">
             Contagem de Paletes
         </button>
-
     </div>
-
-
-    <!-- ==========================
-         ABA REQUISIÇÕES
-    ========================== -->
-
-    <div
-        id="requisicoes"
-        class="tab-content active"
-    >
-
+    <div id="requisicoes" class="tab-content active">
         <div class="container">
-
             <h1>
                 Requisições Superviza
             </h1>
-
-
             <div class="campos">
-
                 <div class="campo">
-
                     <label for="inicio">
                         Início
                     </label>
-
-                    <input
-                        type="number"
-                        id="inicio"
-                        placeholder="Ex: 1001"
-                    >
-
+                    <input type="number" id="inicio" placeholder="Ex: 1001">
                 </div>
-
-
                 <div class="campo">
-
                     <label for="fim">
                         Fim
                     </label>
-
-                    <input
-                        type="number"
-                        id="fim"
-                        placeholder="Ex: 1009"
-                    >
-
+                    <input type="number" id="fim" placeholder="Ex: 1009">
                 </div>
-
             </div>
-
-
             <button onclick="gerarNumeros()">
                 Imprimir Requisições
             </button>
-
-
-            <textarea
-                id="resultado"
-                readonly
-                placeholder="O resultado aparecerá aqui..."
-            ></textarea>
-
-
+            <textarea id="resultado" readonly placeholder="O resultado aparecerá aqui..."></textarea>
             <button onclick="copiarResultado()">
                 Copiar
             </button>
-
-
             <div id="mensagem"></div>
-
         </div>
-
     </div>
-
-
-    <!-- ==========================
-         ABA PALETES
-    ========================== -->
-
-    <div
-        id="paletes"
-        class="tab-content"
-    >
-
+    <div id="paletes" class="tab-content">
         <div class="container">
-
             <h1>
                 Contagem de Paletes
             </h1>
-
-
-            <!-- ==========================
-                 RESFRIADOS
-            ========================== -->
-
             <div class="categoria">
-
                 <h2>
                     RESFRIADOS
                 </h2>
-
-
                 <div id="resfriados"></div>
-
-
-                <div
-                    id="totalResfriados"
-                    class="total-categoria"
-                >
+                <div id="totalResfriados" class="total-categoria">
                     Total: 0 paletes
                 </div>
-
             </div>
-
-
-            <!-- ==========================
-                 CONGELADOS
-            ========================== -->
-
             <div class="categoria">
-
                 <h2>
                     CONGELADOS
                 </h2>
-
-
                 <div id="congelados"></div>
-
-
-                <div
-                    id="totalCongelados"
-                    class="total-categoria"
-                >
+                <div id="totalCongelados" class="total-categoria">
                     Total: 0 paletes
                 </div>
-
             </div>
-
-
-            <!-- ==========================
-                 SALGADOS
-            ========================== -->
-
             <div class="categoria">
-
                 <h2>
                     SALGADOS
                 </h2>
-
-
                 <div id="salgados"></div>
-
-
-                <div
-                    id="totalSalgados"
-                    class="total-categoria"
-                >
+                <div id="totalSalgados" class="total-categoria">
                     Total: 0 paletes
                 </div>
-
             </div>
-
-
-            <!-- ==========================
-                 TOTAL GERAL
-            ========================== -->
-
-            <div
-                id="totalGeral"
-                class="total-geral"
-            >
+            <div id="totalGeral" class="total-geral">
                 TOTAL GERAL: 0 PALETES
             </div>
-
-
-            <!-- ==========================
-                 BOTÕES
-            ========================== -->
-
             <button onclick="gerarRelatorio()">
-
                 Gerar Relatório
-
             </button>
-
-
-            <button
-                class="botao-copiar"
-                onclick="copiarRelatorio()"
-            >
-
+            <button class="botao-copiar" onclick="copiarRelatorio()">
                 Copiar Relatório
-
             </button>
-
-
-            <button
-                class="botao-zerar"
-                onclick="zerarContagem()"
-            >
-
+            <button class="botao-zerar" onclick="zerarContagem()">
                 Zerar Contagem
-
             </button>
-
-
-            <!-- ==========================
-                 RELATÓRIO
-            ========================== -->
-
-            <div
-                id="relatorio"
-                class="relatorio"
-            ></div>
-
+            <div id="relatorio" class="relatorio"></div>
         </div>
-
     </div>
-
-
     <script>
-
-        /* ==========================
-           DADOS DAS LOJAS
-        ========================== */
-
         const lojas = [
-
-            "Loja 01",
-
-            "Loja 02",
-
-            "Loja 03",
-
-            "Loja 04",
-
-            "Loja 05",
-
-            "Loja 06",
-
-            "Atacado 201",
-
-            "Atacado 202",
-
-            "Atacado 203",
-
-            "Atacado 204",
-
-            "Atacado 205",
-
-            "Atacado 401"
-
+            "Matriz",
+            "Campos Novos",
+            "Fraiburgo",
+            "Caçador LJ04",
+            "Joaçaba",
+            "Caçador Centro",
+            "At. Videira",
+            "At. Chapeco",
+            "At. S. Cecilia",
+            "At. Caçador",
+            "At. Lages",
+            "At. Pato Branco"
         ];
-
-
-        /* ==========================
-           CONTADORES
-        ========================== */
-
         let contadores = {
-
             resfriados: {},
-
             congelados: {},
-
             salgados: {}
-
         };
-
-
-        /* ==========================
-           CARREGAR DADOS
-        ========================== */
-
         function carregarDados() {
-
             const dadosSalvos =
                 localStorage.getItem(
                     "contagemPaletes"
                 );
-
-
             if (dadosSalvos) {
-
                 contadores =
                     JSON.parse(dadosSalvos);
-
             }
-
-
             criarLojas(
                 "resfriados"
             );
-
             criarLojas(
                 "congelados"
             );
-
             criarLojas(
                 "salgados"
             );
-
-
             atualizarTotais();
-
         }
-
-
-        /* ==========================
-           CRIAR LOJAS
-        ========================== */
-
         function criarLojas(categoria) {
-
             const container =
                 document.getElementById(
                     categoria
                 );
-
-
             container.innerHTML = "";
-
-
             lojas.forEach(
                 (loja, index) => {
-
                     const id =
                         categoria +
                         "_" +
                         index;
-
-
                     if (
                         contadores[categoria][id]
                         === undefined
                     ) {
-
                         contadores[categoria][id] =
                             0;
-
                     }
-
-
                     const div =
                         document.createElement(
                             "div"
                         );
-
-
                     div.className =
                         "loja";
-
-
                     div.innerHTML = `
-
                         <span class="nome-loja">
                             ${loja}
                         </span>
-
                         <div class="contador">
-
                             <button
                                 onclick="alterarQuantidade(
                                     '${categoria}',
@@ -854,14 +396,12 @@
                             >
                                 −
                             </button>
-
                             <span
                                 class="quantidade"
                                 id="${id}"
                             >
                                 ${contadores[categoria][id]}
                             </span>
-
                             <button
                                 onclick="alterarQuantidade(
                                     '${categoria}',
@@ -871,136 +411,65 @@
                             >
                                 +
                             </button>
-
                         </div>
-
                     `;
-
-
                     container.appendChild(
                         div
                     );
-
                 }
             );
-
         }
-
-
-        /* ==========================
-           ALTERAR QUANTIDADE
-        ========================== */
-
         function alterarQuantidade(
             categoria,
             id,
             valor
         ) {
-
             let quantidade =
                 contadores[categoria][id];
-
-
             quantidade += valor;
-
-
             if (quantidade < 0) {
-
                 quantidade = 0;
-
             }
-
-
             contadores[categoria][id] =
                 quantidade;
-
-
             document.getElementById(id)
                 .textContent =
                 quantidade;
-
-
             salvarDados();
-
             atualizarTotais();
-
         }
-
-
-        /* ==========================
-           SALVAR
-        ========================== */
-
         function salvarDados() {
-
             localStorage.setItem(
-
                 "contagemPaletes",
-
                 JSON.stringify(
                     contadores
                 )
-
             );
-
         }
-
-
-        /* ==========================
-           TOTAL POR CATEGORIA
-        ========================== */
-
         function calcularTotal(categoria) {
-
             let total = 0;
-
-
             Object.values(
                 contadores[categoria]
             ).forEach(
                 quantidade => {
-
                     total += quantidade;
-
                 }
             );
-
-
             return total;
-
         }
-
-
-        /* ==========================
-           ATUALIZAR TOTAIS
-        ========================== */
-
         function atualizarTotais() {
-
             const totalResfriados =
                 calcularTotal(
                     "resfriados"
                 );
-
-
             const totalCongelados =
                 calcularTotal(
                     "congelados"
                 );
-
-
             const totalSalgados =
                 calcularTotal(
                     "salgados"
                 );
-
-
-            const totalGeral =
-                totalResfriados +
-                totalCongelados +
-                totalSalgados;
-
-
             document.getElementById(
                 "totalResfriados"
             ).textContent =
@@ -1008,11 +477,9 @@
                 totalResfriados +
                 (
                     totalResfriados === 1
-                    ? " palete"
-                    : " paletes"
+                        ? " palete"
+                        : " paletes"
                 );
-
-
             document.getElementById(
                 "totalCongelados"
             ).textContent =
@@ -1020,11 +487,9 @@
                 totalCongelados +
                 (
                     totalCongelados === 1
-                    ? " palete"
-                    : " paletes"
+                        ? " palete"
+                        : " paletes"
                 );
-
-
             document.getElementById(
                 "totalSalgados"
             ).textContent =
@@ -1032,445 +497,249 @@
                 totalSalgados +
                 (
                     totalSalgados === 1
-                    ? " palete"
-                    : " paletes"
+                        ? " palete"
+                        : " paletes"
                 );
-
-
-            document.getElementById(
-                "totalGeral"
-            ).textContent =
-                "TOTAL GERAL: " +
-                totalGeral +
-                (
-                    totalGeral === 1
-                    ? " PALETE"
-                    : " PALETES"
-                );
-
         }
-
-
-        /* ==========================
-           GERAR RELATÓRIO
-        ========================== */
-
         function gerarRelatorio() {
-
             let relatorio = "";
-
-
             const categorias = [
-
                 {
                     nome: "RESFRIADOS",
                     id: "resfriados"
                 },
-
                 {
                     nome: "CONGELADOS",
                     id: "congelados"
                 },
-
                 {
                     nome: "SALGADOS",
                     id: "salgados"
                 }
-
             ];
-
-
             categorias.forEach(
                 categoria => {
-
                     let linhas = "";
-
-
                     lojas.forEach(
                         (loja, index) => {
-
                             const id =
                                 categoria.id +
                                 "_" +
                                 index;
-
-
                             const quantidade =
                                 contadores[
-                                    categoria.id
+                                categoria.id
                                 ][id] || 0;
-
-
                             if (
                                 quantidade > 0
                             ) {
-
                                 linhas +=
                                     loja +
                                     ": " +
                                     quantidade +
                                     (
                                         quantidade === 1
-                                        ? " palete\n"
-                                        : " paletes\n"
+                                            ? " palete\n"
+                                            : " paletes\n"
                                     );
-
                             }
-
                         }
                     );
-
-
                     if (linhas !== "") {
-
                         relatorio +=
                             categoria.nome +
                             "\n";
-
                         relatorio +=
                             linhas +
                             "\n";
-
                     }
-
                 }
             );
-
-
             const totalResfriados =
                 calcularTotal(
                     "resfriados"
                 );
-
-
             const totalCongelados =
                 calcularTotal(
                     "congelados"
                 );
-
-
             const totalSalgados =
                 calcularTotal(
                     "salgados"
                 );
-
-
-            const totalGeral =
-                totalResfriados +
-                totalCongelados +
-                totalSalgados;
-
-
             relatorio +=
                 "TOTAL RESFRIADOS: " +
                 totalResfriados +
                 " paletes\n";
-
-
             relatorio +=
                 "TOTAL CONGELADOS: " +
                 totalCongelados +
                 " paletes\n";
-
-
             relatorio +=
                 "TOTAL SALGADOS: " +
                 totalSalgados +
                 " paletes\n";
-
-
-            relatorio +=
-                "TOTAL GERAL: " +
-                totalGeral +
-                " paletes";
-
-
             document.getElementById(
                 "relatorio"
             ).textContent =
                 relatorio;
-
         }
-
-
-        /* ==========================
-           COPIAR RELATÓRIO
-        ========================== */
-
         function copiarRelatorio() {
-
             const relatorio =
                 document.getElementById(
                     "relatorio"
                 );
-
-
             if (
                 relatorio.textContent.trim()
                 === ""
             ) {
-
                 alert(
                     "Gere o relatório primeiro."
                 );
-
                 return;
-
             }
-
-
             navigator.clipboard.writeText(
                 relatorio.textContent
             );
-
-
             alert(
                 "Relatório copiado!"
             );
-
         }
-
-
-        /* ==========================
-           ZERAR CONTAGEM
-        ========================== */
-
         function zerarContagem() {
-
             const confirmar =
                 confirm(
                     "Tem certeza que deseja zerar toda a contagem?"
                 );
-
-
             if (!confirmar) {
-
                 return;
-
             }
-
-
             contadores = {
-
                 resfriados: {},
-
                 congelados: {},
-
                 salgados: {}
-
             };
-
-
             salvarDados();
-
-
             criarLojas(
                 "resfriados"
             );
-
             criarLojas(
                 "congelados"
             );
-
             criarLojas(
                 "salgados"
             );
-
-
             atualizarTotais();
-
-
             document.getElementById(
                 "relatorio"
             ).textContent = "";
-
         }
-
-
-        /* ==========================
-           ABRIR ABA
-        ========================== */
-
         function abrirAba(
             nomeAba,
             botao
         ) {
-
             const abas =
                 document.querySelectorAll(
                     ".tab-content"
                 );
-
-
             const botoes =
                 document.querySelectorAll(
                     ".tab-button"
                 );
-
-
             abas.forEach(
                 aba => {
-
                     aba.classList.remove(
                         "active"
                     );
-
                 }
             );
-
-
             botoes.forEach(
                 botao => {
-
                     botao.classList.remove(
                         "active"
                     );
-
                 }
             );
-
-
             document.getElementById(
                 nomeAba
             ).classList.add(
                 "active"
             );
-
-
             botao.classList.add(
                 "active"
             );
-
         }
-
-
-        /* ==========================
-           GERADOR DE NÚMEROS
-        ========================== */
-
         function gerarNumeros() {
-
             const inicio =
                 parseInt(
                     document.getElementById(
                         "inicio"
                     ).value
                 );
-
-
             const fim =
                 parseInt(
                     document.getElementById(
                         "fim"
                     ).value
                 );
-
-
             if (
                 isNaN(inicio) ||
                 isNaN(fim)
             ) {
-
                 alert(
                     "Digite o número inicial e o número final."
                 );
-
                 return;
-
             }
-
-
             if (inicio > fim) {
-
                 alert(
                     "O número inicial deve ser menor ou igual ao número final."
                 );
-
                 return;
-
             }
-
-
             let numeros = [];
-
-
             for (
                 let i = inicio;
                 i <= fim;
                 i++
             ) {
-
                 numeros.push(i);
-
             }
-
-
             document.getElementById(
                 "resultado"
             ).value =
                 numeros.join(",");
-
         }
-
-
-        /* ==========================
-           COPIAR REQUISIÇÕES
-        ========================== */
-
         function copiarResultado() {
-
             const resultado =
                 document.getElementById(
                     "resultado"
                 );
-
-
             if (
                 resultado.value === ""
             ) {
-
                 alert(
                     "Gere os números primeiro."
                 );
-
                 return;
-
             }
-
-
             navigator.clipboard.writeText(
                 resultado.value
             );
-
-
             document.getElementById(
                 "mensagem"
             ).textContent =
                 "Números copiados!";
-
-
             setTimeout(
                 () => {
-
                     document.getElementById(
                         "mensagem"
                     ).textContent = "";
-
                 },
                 2000
             );
-
         }
-
-
-        /* ==========================
-           INICIALIZAÇÃO
-        ========================== */
-
         carregarDados();
-
     </script>
-
 </body>
 
 </html>
